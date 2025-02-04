@@ -1,0 +1,10 @@
+for(int i=1; i < a.length - 1; i++) {  // Loop through the array, starting from the second element
+    int curr = a[i];                   // Store the current element
+    int j = i - 1;                      // Start comparing with previous elements
+
+    while(j >= 0 && curr < a[j]) {      // Shift elements greater than curr
+        a[j + 1] = a[j];                
+        j--;                             // Move left
+    }
+    a[j + 1] = curr;                    // Insert curr at the correct position
+}

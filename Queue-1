@@ -1,0 +1,173 @@
+// Implement Queue using Arrays(fix size take static)
+public class Queue1 {
+    // Defining a static Queue class
+    static class Queue {
+        static int arr[]; // Array to store queue elements
+        static int size;  // Maximum size of the queue
+        static int rear = -1; // Rear pointer (tracks the last element)
+
+        // Constructor to initialize the queue with a given size
+        public Queue(int n) {
+            arr = new int[n]; // Create an array of size 'n'
+            this.size = n;    // Store the queue size
+        }
+
+        // Function to check if the queue is empty
+        public static boolean isEmpty() {
+            return rear == -1; // Queue is empty if rear is -1
+        }
+
+        // Function to add an element to the queue (enqueue operation)
+        public static void add(int data) {
+            if (rear == size - 1) { // If the queue is full, do nothing
+                System.out.println("Queue is full");
+                return;
+            }
+            rear++;        // Move rear to the next position
+            arr[rear] = data; // Insert new element at the rear
+        }
+
+        // Function to remove an element from the queue (dequeue operation)
+        public static int remove() {
+            if (isEmpty()) { // If the queue is empty, return -1
+                System.out.println("Queue is empty");
+                return -1;
+            }
+            int front = arr[0]; // Store the front element to return it
+
+            // Shift all elements one step left to maintain queue order
+            for (int i = 0; i < rear; i++) {
+                arr[i] = arr[i + 1];
+            }
+            rear--; // Reduce rear index after shifting
+            return front; // Return the removed element
+        }
+
+        // Function to get the front element of the queue (peek operation)
+        public static int peek() {
+            if (isEmpty()) { // If the queue is empty, return -1
+                System.out.println("Queue is empty");
+                return -1;
+            }
+            return arr[0]; // Return the front element without removing it
+        }
+    }
+
+    // Main function to test the queue operations
+    public static void main(String[] args) {
+        Queue q = new Queue(5); // Create a queue with size 5
+        q.add(1);
+        q.add(2);
+        q.add(3);
+        q.add(4);
+
+        // Print and remove elements from the queue until it becomes empty
+        while (!q.isEmpty()) {
+            System.out.println(q.peek()); // Print the front element
+            q.remove(); // Remove the front element
+        }
+    }
+}
+.............................................................................................................................................................................
+......................Implement Circular Queue using Array..........Most code is same as above one...........................................................................
+public class Queue1 {
+    static class Queue {
+        static int arr[]; // Array to store queue elements
+        static int size;  // Maximum size of the queue
+        static int rear = -1; // Rear pointer (tracks the last element)
+        static int front = -1; // Front pointer (tracks the first element)
+
+        // Constructor to initialize the queue with a given size
+        public Queue(int n) {
+            arr = new int[n]; // Create an array of size 'n'
+            this.size = n;    // Store the queue size
+        }
+
+        // Function to check if the queue is empty
+        public static boolean isEmpty() {
+            return rear == -1 && front == -1; // Queue is empty if both front and rear are -1
+        }
+
+        // Function to check if the queue is full (circular condition)
+        public static boolean isFull() {
+            return (rear + 1) % size == front;
+        }
+
+        // Function to add an element to the queue (enqueue operation)
+        public static void add(int data) {
+            if (isFull()) { // If the queue is full, print a message and return
+                System.out.println("Queue is full");
+                return;
+            }
+            // If inserting the first element, set front to 0
+            if (front == -1) {
+                front = 0;
+            }
+            rear = (rear + 1) % size; // Move rear to the next position in circular order
+            arr[rear] = data; // Insert new element at the rear
+        }
+
+        // Function to remove an element from the queue (dequeue operation)
+        public static int remove() {
+            if (isEmpty()) { // If the queue is empty, return -1
+                System.out.println("Queue is empty");
+                return -1;
+            }
+            int result = arr[front]; // Store the front element to return it
+
+            // If there is only one element left, reset front and rear
+            if (front == rear) {
+                front = rear = -1;
+            } else {
+                front = (front + 1) % size; // Move front to the next element in circular order
+            }
+            return result; // Return the removed element
+        }
+
+        // Function to get the front element of the queue (peek operation)
+        public static int peek() {
+            if (isEmpty()) { // If the queue is empty, return -1
+                System.out.println("Queue is empty");
+                return -1;
+            }
+            return arr[front]; // Return the front element without removing it
+        }
+    }
+
+    // Main function to test the queue operations
+    public static void main(String[] args) {
+        Queue q = new Queue(5); // Create a queue with size 5
+        q.add(1);
+        q.add(2);
+        q.add(3);
+        q.add(4);
+
+        // Print and remove elements from the queue until it becomes empty
+        while (!q.isEmpty()) {
+            System.out.println(q.peek()); // Print the front element
+            q.remove(); // Remove the front element
+        }
+    }
+}
+............................................Implement Collection framework inQUEUE..........................................................................................
+import java.util.ArrayDeque;
+import java.util.Queue; // Import the Queue interface
+
+public class Queue1 {
+    public static void main(String[] args) {
+        Queue<Integer> q = new ArrayDeque<>(); // Use Queue interface with ArrayDeque implementation
+
+        // Adding elements to the queue
+        q.add(1);
+        q.add(2);
+        q.add(3);
+        q.add(4);
+
+        // Printing and removing elements from the queue
+        while (!q.isEmpty()) {
+            System.out.println(q.peek()); // Peek at the front element
+            q.remove(); // Remove the front element
+        }
+    }
+}
+

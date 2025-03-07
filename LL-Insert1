@@ -1,0 +1,68 @@
+// Class to implement a simple Linked List
+public class LL {
+    static Node head; // Head of the linked list (points to the first node)
+
+    // Method to insert a new node at the beginning of the linked list
+    public static void insertAtStart(int data) {
+        Node newNode = new Node(data); // Create a new node
+        if (head == null) { // If the list is empty, make the new node the head
+            head = newNode;
+            return;
+        }
+        newNode.next = head; // Point new node's next to the current head
+        head = newNode; // Update head to the new node
+    }
+
+
+
+    // Method to insert a new node at the end of the linked list
+    public static void insertAtEnd(int data) {
+        Node newNode = new Node(data); // Create a new node
+        if (head == null) { // If the list is empty, make the new node the head
+            head = newNode;
+            return;
+        }
+        Node temp = head; // Start from the head
+        while (temp.next != null) { // Traverse to the last node
+            temp = temp.next;
+        }
+        temp.next = newNode; // Set the last node's next to the new node
+    }
+
+
+    // Method to display the linked list elements
+    public static void display() {
+        Node temp = head; // Start from the head
+        while (temp != null) { // Traverse until the end
+            System.out.print(temp.data + " -> "); // Print current node data
+            temp = temp.next; // Move to the next node
+        }
+        System.out.println("Null"); // Indicate end of the list
+    }
+
+
+    public static void main(String[] args) {
+        LL list = new LL(); // Create a linked list object
+
+        // Insert elements at the end of the list
+        list.insertAtEnd(1);
+        list.insertAtEnd(2);
+        list.display(); // Output: 1 -> 2 -> Null
+
+        // Insert an element at the start of the list
+        list.insertAtStart(0);
+        System.out.println(); // For better formatting
+        list.display(); // Output: 0 -> 1 -> 2 -> Null
+    }
+}
+
+// Class representing a node in the linked list
+class Node {
+    int data; // Data part of the node
+    Node next; // Pointer to the next node
+
+    Node(int data) { // Constructor to initialize a new node
+        this.data = data;
+        this.next = null;
+    }
+}
